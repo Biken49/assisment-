@@ -1,12 +1,13 @@
 const { Pool } = require('pg');
+require('dotenv').config(); // Load .env variables
 
 const pool = new Pool({
-  host: 'localhost',
-  user: 'postgres',
-  password: 'postgres',
-  database: 'energy_db',
-  port: 5432,
-  max: 10
+  host: process.env.DB_HOST,       // e.g., "db" for Docker
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: parseInt(process.env.DB_PORT, 10),
+  max: parseInt(process.env.DB_MAX_POOL, 10) || 10, // optional
 });
 
 module.exports = {
