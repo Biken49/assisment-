@@ -1,27 +1,25 @@
-## Setup & Initialize Database
+# Telemetry Ingestion API
 
-This project uses Docker and PostgreSQL. To start the application and initialize the database with demo tables and data, run the following commands from the project root:
+## Overview
 
-```bash
-# Stop and remove any running containers
-docker-compose down
+This project is a Node.js + Express based Telemetry Ingestion API designed to receive, store, and process telemetry data from devices or services. The system is built using a clean layered architecture with separation of concerns between routes, controllers, services, and database models.
 
-# Remove the Postgres volume so init scripts run fresh
-docker volume rm assisment-_pg_data
+The API exposes an endpoint to ingest telemetry data and returns a success status when data is received correctly.
 
-# Start containers (Postgres will initialize the database)
-docker-compose up -d
+---
 
-# Wait a few seconds for Postgres to start
-sleep 10
+## Tech Stack
 
-# Run SQL scripts manually to create tables and insert demo data
-docker exec -i postgres_db psql -U postgres -d energy_db < db-init/create_tables.sql
-docker exec -i postgres_db psql -U postgres -d energy_db < db-init/insert_sample_data.sql
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose (ODM)
+- dotenv (Environment Variables)
+- Nodemon (Development)
 
-# Verify tables and demo data
-docker exec -it postgres_db psql -U postgres -d energy_db -c "\dt"
-docker exec -it postgres_db psql -U postgres -d energy_db -c "SELECT * FROM meter_telemetry_history LIMIT 5;"
-docker exec -it postgres_db psql -U postgres -d energy_db -c "SELECT * FROM meter_live_status LIMIT 5;"
-docker exec -it postgres_db psql -U postgres -d energy_db -c "SELECT * FROM vehicle_telemetry_history LIMIT 5;"
-docker exec -it postgres_db psql -U postgres -d energy_db -c "SELECT * FROM vehicle_live_status LIMIT 5;"
+---
+
+## Project Architecture
+
+The project follows a modular and scalable architecture:
+
