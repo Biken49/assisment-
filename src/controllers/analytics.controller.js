@@ -1,4 +1,4 @@
-const analyticsService = require('../services/analytics.service');
+const analyticsService = require('../services/analytics.services');
 
 async function getPerformance(req, res) {
   try {

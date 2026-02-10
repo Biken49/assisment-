@@ -4,7 +4,6 @@ const vehicleModel = require('../models/vehicle.model');
 async function ingestTelemetry(req, res) {
   try {
     const payload = req.body;
-
     // Meter Stream
     if (payload.meterId) {
       await meterModel.insertMeterHistory(payload);
